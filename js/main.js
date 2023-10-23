@@ -59,6 +59,7 @@ function StartCapture(){
     
     // Save the captured image to the server
     proceed_btn.addEventListener("click", function() {
+        e.preventDefault();
         const imageDataURL = canvas.toDataURL('image/jpeg');
         $.ajax({
             type: "POST",
@@ -68,7 +69,14 @@ function StartCapture(){
             },
             success: function(response){
                 var jsonResponse = JSON.parse(response);
-                console.log(jsonResponse.status);
+                console.log("kese"+jsonResponse.status);
+                if (jsonResponse.status == 1) {
+                    console.log("hi"+jsonResponse.status);
+                    window.location.href = "loged_in.php";
+                } else {
+                    console.log("bi"+jsonResponse.status);
+                    window.location.href = "http://localhost/face_capture/";
+                }
             }
         });
     });

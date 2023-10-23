@@ -9,9 +9,10 @@ if (isset($_POST['selfie'])) {
     }
     $filename = $uploadFolder . 'image_' . time() . '.jpg';
     if (file_put_contents($filename, $imageData)) {
-        echo json_encode(['status' => 1]);
+        echo json_encode(['status' => "success"]);
+        
     } else {
-        echo json_encode(['status' => 0]);
+        echo json_encode(['status' => "failed"]);
     }
 } else {
     echo json_encode(['status' => 'No data received']);
