@@ -24,7 +24,7 @@
                 
                 <button id="capture-button" class="btn btn-primary"  onclick="StartCapture()">Get Started</button>
                 <button id="savecapture-button" class="btn btn-primary mr-5 d-none">Image Capture</button>
-                <button id="recapture-button" class="btn btn-warning d-none"  disabled>Recapture</button>
+                <button id="recapture-button" class="btn btn-warning d-none"  disabled>Re-capture</button>
             </div>
 
         </div>
