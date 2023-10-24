@@ -22,7 +22,7 @@ function StartCapture(){
             video.srcObject = stream;
         })
         .catch(function(err) {
-            alert("Error: Camera is not enabled..!")
+            alert("Error: Camera is not enabled..!");
             console.error("Error accessing camera:", err);
         });
     
@@ -59,26 +59,29 @@ function StartCapture(){
     
     // Save the captured image to the server
     proceed_btn.addEventListener("click", function() {
-        e.preventDefault();
         const imageDataURL = canvas.toDataURL('image/jpeg');
+    
         $.ajax({
             type: "POST",
             url: "saveimage.php",
-            data: {
-                selfie : imageDataURL
-            },
-            success: function(response){
-                var jsonResponse = JSON.parse(response);
-                console.log("kese"+jsonResponse.status);
-                if (jsonResponse.status == 1) {
-                    console.log("hi"+jsonResponse.status);
-                    window.location.href = "loged_in.php";
+            data: { canvas: imageDataURL },
+            success: function(response) {
+                const jsonResponse = JSON.parse(response);
+                console.log("Status:", jsonResponse.status);
+    
+                if (jsonResponse.status === 'success') {
+                    console.log("Image saved successfully");
+                    window.location.href = "http://localhost/face_capture/loged_in.php";
                 } else {
-                    console.log("bi"+jsonResponse.status);
+                    console.log("Image save failed");
                     window.location.href = "http://localhost/face_capture/";
                 }
+            },
+            error: function(error) {
+                console.error("Error:", error);
             }
         });
     });
+    
 
 }

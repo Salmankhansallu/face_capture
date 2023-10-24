@@ -1,6 +1,6 @@
 <?php
-if (isset($_POST['selfie'])) {
-    $base64Image = $_POST['selfie'];
+if (isset($_POST['canvas'])) {
+    $base64Image = $_POST['canvas'];
     $base64Image = preg_replace('/^data:image\/[a-z]+;base64,/', '', $base64Image);
     $imageData = base64_decode($base64Image);
     $uploadFolder = 'uploads/';
@@ -10,7 +10,6 @@ if (isset($_POST['selfie'])) {
     $filename = $uploadFolder . 'image_' . time() . '.jpg';
     if (file_put_contents($filename, $imageData)) {
         echo json_encode(['status' => "success"]);
-        
     } else {
         echo json_encode(['status' => "failed"]);
     }
